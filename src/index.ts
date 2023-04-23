@@ -79,37 +79,55 @@
 // };
 // myName = oldFunc;
 import { arr } from './words';
+import { api } from './fetch';
 const newScreen = document.querySelector('[screen-active]') as HTMLDivElement;
 const btns = document.querySelector('[button]') as HTMLButtonElement;
 const progerssDiv = document.querySelector('[progerss]') as HTMLDivElement;
 const backToStart = document.querySelector('[btn-back]') as HTMLButtonElement;
-
+const divImg = document.querySelector('[active-img]') as HTMLDivElement;
 let count = 0;
 let procent = 0;
 backToStart.addEventListener('click', e => {
   count = 0;
   procent = 0;
 });
+takeImg();
 btns.addEventListener('click', searchNewBtn);
 function searchNewBtn(e): void {
   const target = e.target.textContent;
   if (target == '>') increment();
   else if (target == '<') decrement();
-
+  api.query = arr[count].word;
+  takeImg();
   progerssDiv.style.width = procent + '%';
   newScreen.textContent = arr[count].word;
 }
+async function takeImg() {
+  try {
+    const { data } = await api.makeFetch();
+    divImg.innerHTML = `<img src="${data.hits[1].largeImageURL}" class="img-fluid" alt="">`;
+    console.log(data.hits);
+  } catch (err) {
+    console.log(err);
+  }
+}
 newScreen.addEventListener('click', e => {
   if (newScreen.textContent == arr[count].word) {
-    newScreen.classList.remove('bg-seccess');
-    newScreen.classList.add('bg-danger');
+    changeBgDiv();
     newScreen.textContent = arr[count].translite;
   } else if (newScreen.textContent == arr[count].translite) {
     newScreen.classList.remove('bg-danger');
+    divImg.classList.remove('bg-danger');
+
     newScreen.textContent = arr[count].word;
   }
 });
-
+function changeBgDiv() {
+  newScreen.classList.remove('bg-seccess');
+  newScreen.classList.add('bg-danger');
+  divImg.classList.remove('bg-seccess');
+  divImg.classList.add('bg-danger');
+}
 function increment(): void {
   moreThenZero((count += 1));
   moreProcent((procent += 1.15));
