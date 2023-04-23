@@ -106,8 +106,9 @@ function searchNewBtn(e): void {
 async function takeImg() {
   try {
     const { data } = await api.makeFetch();
-    divImg.innerHTML = `<img src="${data.hits[1].largeImageURL}" class="img-fluid" alt="">`;
-    console.log(data.hits);
+
+    const template: string = `<img src="${data.hits[5].largeImageURL}" class="img-fluid" height="300px" alt="">`;
+    divImg.innerHTML = template;
   } catch (err) {
     console.log(err);
   }
