@@ -100,6 +100,7 @@ function searchNewBtn(e): void {
   api.query = arr[count].word;
   takeImg();
   progerssDiv.style.width = procent + '%';
+  // progerssDiv.textContent = `${Math.floor(procent)}`;
   newScreen.textContent = arr[count].word;
 }
 async function takeImg() {
