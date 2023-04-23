@@ -1,3 +1,72 @@
+import { arr } from './words';
+import { api } from './fetch';
+import { objRefs } from './refs';
+
+let count = 0;
+let procent = 0;
+objRefs.backToStart.addEventListener('click', e => {
+  count = 0;
+  procent = 0;
+});
+takeImg();
+objRefs.btns.addEventListener('click', searchNewBtn);
+function searchNewBtn(e): void {
+  const target = e.target.textContent;
+  if (target == '>') increment();
+  else if (target == '<') decrement();
+  api.query = arr[count].word;
+  takeImg();
+  objRefs.progerssDiv.style.width = procent + '%';
+  objRefs.newScreen.textContent = arr[count].word;
+}
+async function takeImg() {
+  try {
+    const { data } = await api.makeFetch();
+    const template: string = `<img src="${data.hits[5].largeImageURL}" class="img-fluid" height="300px" alt="">`;
+    objRefs.divImg.innerHTML = template;
+  } catch (err) {
+    console.error(err);
+  }
+}
+objRefs.newScreen.addEventListener('click', e => {
+  if (objRefs.newScreen.textContent == arr[count].word) {
+    changeBgDiv();
+    objRefs.newScreen.textContent = arr[count].translite;
+  } else if (objRefs.newScreen.textContent == arr[count].translite) {
+    objRefs.newScreen.classList.remove('bg-danger');
+    objRefs.divImg.classList.remove('bg-danger');
+
+    objRefs.newScreen.textContent = arr[count].word;
+  }
+});
+function changeBgDiv() {
+  objRefs.newScreen.classList.remove('bg-seccess');
+  objRefs.newScreen.classList.add('bg-danger');
+  objRefs.divImg.classList.remove('bg-seccess');
+  objRefs.divImg.classList.add('bg-danger');
+}
+function increment(): void {
+  moreThenZero((count += 1));
+  moreProcent((procent += 1.15));
+}
+function decrement(): void {
+  moreThenZero((count -= 1));
+  moreProcent((procent -= 1.15));
+}
+function moreThenZero(num): void {
+  if (num < 0) {
+    count = arr.length - 1;
+  } else if (num > arr.length - 1) {
+    count = 0;
+  }
+}
+function moreProcent(proc): void {
+  if (proc < 0) {
+    procent = 100;
+  } else if (proc > 100) {
+    procent = 0;
+  }
+}
 // const div = document.querySelector('.navbar');
 // div.textContent = 'dd';
 // class Human {
@@ -78,77 +147,3 @@
 //   },
 // };
 // myName = oldFunc;
-import { arr } from './words';
-import { api } from './fetch';
-const newScreen = document.querySelector('[screen-active]') as HTMLDivElement;
-const btns = document.querySelector('[button]') as HTMLButtonElement;
-const progerssDiv = document.querySelector('[progerss]') as HTMLDivElement;
-const backToStart = document.querySelector('[btn-back]') as HTMLButtonElement;
-const divImg = document.querySelector('[active-img]') as HTMLDivElement;
-let count = 0;
-let procent = 0;
-backToStart.addEventListener('click', e => {
-  count = 0;
-  procent = 0;
-});
-takeImg();
-btns.addEventListener('click', searchNewBtn);
-function searchNewBtn(e): void {
-  const target = e.target.textContent;
-  if (target == '>') increment();
-  else if (target == '<') decrement();
-  api.query = arr[count].word;
-  takeImg();
-  progerssDiv.style.width = procent + '%';
-  // progerssDiv.textContent = `${Math.floor(procent)}`;
-  newScreen.textContent = arr[count].word;
-}
-async function takeImg() {
-  try {
-    const { data } = await api.makeFetch();
-
-    const template: string = `<img src="${data.hits[5].largeImageURL}" class="img-fluid" height="300px" alt="">`;
-    divImg.innerHTML = template;
-  } catch (err) {
-    console.log(err);
-  }
-}
-newScreen.addEventListener('click', e => {
-  if (newScreen.textContent == arr[count].word) {
-    changeBgDiv();
-    newScreen.textContent = arr[count].translite;
-  } else if (newScreen.textContent == arr[count].translite) {
-    newScreen.classList.remove('bg-danger');
-    divImg.classList.remove('bg-danger');
-
-    newScreen.textContent = arr[count].word;
-  }
-});
-function changeBgDiv() {
-  newScreen.classList.remove('bg-seccess');
-  newScreen.classList.add('bg-danger');
-  divImg.classList.remove('bg-seccess');
-  divImg.classList.add('bg-danger');
-}
-function increment(): void {
-  moreThenZero((count += 1));
-  moreProcent((procent += 1.15));
-}
-function decrement(): void {
-  moreThenZero((count -= 1));
-  moreProcent((procent -= 1.15));
-}
-function moreThenZero(num): void {
-  if (num < 0) {
-    count = arr.length - 1;
-  } else if (num > arr.length - 1) {
-    count = 0;
-  }
-}
-function moreProcent(proc): void {
-  if (proc < 0) {
-    procent = 100;
-  } else if (proc > 100) {
-    procent = 0;
-  }
-}
