@@ -30,9 +30,9 @@ async function takeImg() {
 async function takeWord() {
   try {
     const { data } = await api.makeEnglishWords();
-    // console.log(data[0].meanings[0].definitions[2]);
+    console.log(data);
     const desrcWord: string = data[0].meanings[0].definitions[1].definition;
-    objRefs.newScreen.innerHTML = data[0].word;
+    objRefs.newScreen.textContent = data[0].word;
     voisWords.src = data[0].phonetics[0].audio;
     textDescr.textContent = desrcWord;
   } catch (err) {

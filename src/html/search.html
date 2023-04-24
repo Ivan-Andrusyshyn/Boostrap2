@@ -32,12 +32,14 @@
           </button>
           <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav mr-auto mb-3 mb-lg-0">
-              <div class="nav-item">
-                <a href="./index.html" class="nav-link HOME el">Home</a>
-              </div>
-            
+              <li class="nav-item">
+                <a href="../index.html" class="nav-link HOME el">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="./library.html" class="nav-link HOME el">My Library</a>
+              </li>
         
-          </div>
+            </ul>
         </div>
       </nav>
     </header>
@@ -45,7 +47,7 @@
         
         <div class="d-flex flex-column align-items-center justify-content-center">
             <form action="#" class="d-flex pb-2"
-            style="width: 360px"
+            style="width: 330px"
               data-search-forms>
             <input
               name="searchQuery"
@@ -62,10 +64,11 @@
             <div
               class="pt-2 bg-success p-2"
               active-img
-              style="width: 360px; height: 231px"
-            ></div>
+              style="width: 330px; height: 231px"
+            >
+          </div>
             <div
-              style="width: 360px"
+              style="width: 330px"
               class="p-2 fs-3 fw-bold bg-success text-center text-primary text-dark justify-content-center"
               screen-active
             >
@@ -73,14 +76,17 @@
             </div>
             <audio src="#" controls  class="p-2 music"></audio>
             <p class="text-center p-2 text-danger fw-bold"
-            style="width: 360px"
+            style="width: 330px; margin-bottom: 0;"
             text-describe></p>
+            <button type="button" class="btn btn-outline-primary" btn-active-add>Add</button>
+
           </div>
         </div>
   
       
       </div>
-    <script src="./search.ts" type="module"></script>
+    <script src="../typescript/search.ts" type="module"></script>
+    <script src="../typescript/library.ts" type="module"></script>
 
     <script
     src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
