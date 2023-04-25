@@ -30,8 +30,7 @@ async function takeImg() {
 async function takeWord() {
   try {
     const { data } = await api.makeEnglishWords();
-    console.log(data);
-    const desrcWord: string = data[0].meanings[0].definitions[1].definition;
+    const desrcWord: string = data[0].meanings[0].definitions[0].definition;
     objRefs.newScreen.textContent = data[0].word;
     objRefs.voisWords.src = data[0].phonetics[0].audio;
     objRefs.textDescr.textContent = desrcWord;
