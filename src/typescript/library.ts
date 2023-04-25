@@ -8,7 +8,7 @@ const localItem = JSON.parse(localStorage.getItem('items'));
 liItem.forEach(el => {
   const id = el.id;
   el.addEventListener('click', e => {
-    const targ: string = e.target.textContent;
+    let targ = e.target.textContent;
     if (targ === 'Remove') {
       localItem.map(el => {
         if (el[0] == id) {
