@@ -97,13 +97,14 @@ function getTemplate(value): string {
     class="pt-2 d-flex flex-column gap-2 justify-content-center  bg-warning p-2 align-items-center "
     active-img
     style="width: 330px;overflow: hidden;"
-  ><img src="${el[3]}" class="img-fluid" height="300px" alt="">
+  >
+  <img src="${el[3]}" class="img-fluid" height="300px" alt="">
   <button type="button" class="btn btn-outline-danger"  btn-active-remove>Remove</button>
 
 </div>
 <div class="card text-white bg-warning mb-3" style="width: 330px; ">
     <div class="card-header fs-3 text-center"screen-active>${el[4]} </div>
-  <div class="card-body ">
+  <div class="card-body d-flex flex-column gap-3 align-items-center">
     <audio src="${el[2]}" controls  class="p-2 music"></audio>
     <p class="card-text text-center"text-describe>${el[1]}</p>
   </div>
