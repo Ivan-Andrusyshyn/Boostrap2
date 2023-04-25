@@ -11,5 +11,6 @@ const objRefs = {
   containerSearch: document.querySelector(
     '[container-search]'
   ) as HTMLDivElement,
+  btnAdd: document.querySelector('[btn-active-add]') as HTMLButtonElement,
 };
 export { objRefs };

@@ -2,8 +2,7 @@ import { api } from './fetch';
 import { objRefs } from './refs';
 import Notiflix from 'notiflix';
 
-const btnAdd = document.querySelector('[btn-active-add]') as HTMLButtonElement;
-btnAdd.addEventListener('click', addCardtoLibrary);
+objRefs.btnAdd.addEventListener('click', addCardtoLibrary);
 
 takeImg();
 takeWord();
@@ -42,8 +41,7 @@ async function takeWord() {
 function addCardtoLibrary() {
   const imgSrc = document.querySelector('[image]') as HTMLImageElement;
   changeTextBtn();
-  if (btnAdd.textContent === 'Delete') {
-  }
+
   if (!localStorage.getItem('items')) {
     localStorage.setItem('items', JSON.stringify([]));
   }
@@ -59,7 +57,7 @@ function addCardtoLibrary() {
     if (el[4] !== word) {
       return el;
     } else {
-      Notiflix.Report.info('This card already exist !', '');
+      Notiflix.Report.warning('This card already exist !', '');
     }
   });
 
@@ -76,12 +74,12 @@ function addCardtoLibrary() {
 // ===========================================================>
 
 function changeTextBtn() {
-  if (btnAdd.textContent == 'Add') {
-    btnAdd.textContent = 'Added';
-    btnAdd.style.backgroundColor = 'green';
+  if (objRefs.btnAdd.textContent == 'Add') {
+    objRefs.btnAdd.textContent = 'Added';
+    objRefs.btnAdd.style.backgroundColor = 'green';
     setTimeout(() => {
-      btnAdd.textContent = 'Add';
-      btnAdd.style.backgroundColor = '';
+      objRefs.btnAdd.textContent = 'Add';
+      objRefs.btnAdd.style.backgroundColor = '';
     }, 2000);
   }
 }
@@ -92,29 +90,25 @@ export function makeItemsList(): void {
 }
 
 function getTemplate(value): string {
-  console.log(value);
   return value.map(el => {
     return `
-  <li class="d-flex flex-column align-items-center data-delete="${el[0]}"">
+  <li class="d-flex flex-column align-items-center "data-delete id="${el[0]}">
   <div
-    class="pt-2 bg-success p-2"
+    class="pt-2 d-flex flex-column gap-2 justify-content-center  bg-warning p-2 align-items-center "
     active-img
-    style="width: 330px; height: 231px"
+    style="width: 330px;overflow: hidden;"
   ><img src="${el[3]}" class="img-fluid" height="300px" alt="">
+  <button type="button" class="btn btn-outline-danger"  btn-active-remove>Remove</button>
+
 </div>
-  <div
-    style="width: 330px"
-    class="p-2 fs-3 fw-bold bg-success text-center text-primary text-dark justify-content-center"
-    screen-active
-  >
-  ${el[4]}
+<div class="card text-white bg-warning mb-3" style="width: 330px; ">
+    <div class="card-header fs-3 text-center"screen-active>${el[4]} </div>
+  <div class="card-body ">
+    <audio src="${el[2]}" controls  class="p-2 music"></audio>
+    <p class="card-text text-center"text-describe>${el[1]}</p>
   </div>
-  <audio src="${el[2]}" controls  class="p-2 music"></audio>
-  <p class="text-center p-2 text-danger fw-bold"
-  style="width: 330px; margin-bottom: 0;"
-  text-describe>${el[1]}</p>
-  <button type="button" class="btn btn-outline-primary" btn-active-add>Delete</button>
-</li>
+</div>
+  </li>
   `;
   });
 }

@@ -12,10 +12,10 @@
       crossorigin="anonymous"
     />
   </head>
-  <body style="background-color: rgba(51, 255, 0, 0.178)">
+  <body style="background-color: rgba(217, 255, 0, 0.39)">
     <header id="header" class="top">
       <nav
-        class="navbar navbar-expand-lg navbar-dark bg-success"
+        class="navbar navbar-expand-lg navbar-dark bg-warning"
       >
         <div class="container">
           <a href="#" class="navbar-brand">My Library</a>
@@ -61,33 +61,36 @@
           <div
             class="d-flex flex-column align-items-center justify-content-center"
           >
-          <div class="d-flex flex-column align-items-center ">
-
+          <li class="d-flex flex-column align-items-center "data-delete="">
             <div
-              class="pt-2 bg-success p-2"
+              class="pt-2  bg-warning p-2"
               active-img
               style="width: 330px; height: 231px"
             >
-          </div>
-            <div
-              style="width: 330px"
-              class="p-2 fs-3 fw-bold bg-success text-center text-primary text-dark justify-content-center"
-              screen-active
-            >
-              Hello
-            </div>
-            <audio src="#" controls  class="p-2 music"></audio>
-            <p class="text-center p-2 text-danger fw-bold"
-            style="width: 330px; margin-bottom: 0;"
-            text-describe></p>
-            <button type="button" class="btn btn-outline-primary" btn-active-add>Add</button>
 
           </div>
-        </div>
+            <div
+              class="pt-2 d-flex justify-content-center  bg-warning p-2 align-items-center "
+              active-img
+              style="width: 330px;"
+            ><img src="#" class="img-fluid" height="300px" alt="">
+            <button type="button" class="btn btn-outline-danger" btn-active-add>Add</button>
+         
+          </div>
+          <div class="card text-white bg-warning mb-3" style="width: 330px; ">
+              <div class="card-header fs-3 text-center"screen-active>  </div>
+            <div class="card-body ">
+              <audio src="#" controls  class="p-2 music"></audio>
+              <p class="card-text text-center"text-describe></p>
+            </div>
+          </div>
+            </li>
       </div>
-      <ul class="d-flex p-2 justify-content-center flex-wrap gap-4"container></ul>
   
       </div>
+      <ul class="d-flex p-2 justify-content-center flex-column  gap-4"container></ul>
+
+    </div>
     <script src="../typescript/search.ts" type="module"></script>
     <script src="../typescript/library.ts" type="module"></script>
 
