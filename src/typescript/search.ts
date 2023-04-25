@@ -1,7 +1,6 @@
 import { api } from './fetch';
 import { objRefs } from './refs';
 import Notiflix from 'notiflix';
-
 objRefs.btnAdd.addEventListener('click', addCardtoLibrary);
 
 takeImg();
