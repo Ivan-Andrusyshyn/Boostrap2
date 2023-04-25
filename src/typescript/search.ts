@@ -89,8 +89,9 @@ export function makeItemsList(): void {
 }
 
 function getTemplate(value): string {
-  return value.map(el => {
-    return `
+  return value
+    .map(el => {
+      return `
   <li class="d-flex flex-column align-items-center "data-delete id="${el[0]}">
   <div
     class="pt-2 d-flex flex-column gap-2 justify-content-center  bg-warning p-2 align-items-center "
@@ -110,7 +111,8 @@ function getTemplate(value): string {
 </div>
   </li>
   `;
-  });
+    })
+    .join('');
 }
 function cleanAll() {
   objRefs.containerUl.innerHTML = '';
