@@ -56,7 +56,7 @@ function addCardtoLibrary() {
 
   let newData = JSON.parse(newInfo);
   const removeData = newData.filter(el => {
-    if (el[1] !== word) {
+    if (el[4] !== word) {
       return el;
     } else {
       Notiflix.Report.info('This card already exist !', '');
