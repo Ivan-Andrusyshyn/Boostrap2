@@ -42,7 +42,7 @@ async function takeWord() {
   }
 }
 // ======================================================>
-function addCardtoLibrary() {
+function addCardtoLibrary(): void {
   const imgSrc = document.querySelector('[image]') as HTMLImageElement;
   changeTextBtn();
 
@@ -77,7 +77,7 @@ function addCardtoLibrary() {
 }
 // ===========================================================>
 
-function changeTextBtn() {
+function changeTextBtn(): void {
   if (objRefs.btnAdd.textContent == 'Add') {
     objRefs.btnAdd.textContent = 'Added';
     objRefs.btnAdd.style.backgroundColor = 'green';
@@ -87,9 +87,9 @@ function changeTextBtn() {
     }, 2000);
   }
 }
-export function makeItemsList() {
+export function makeItemsList(): void {
   cleanAll();
-  const elements = JSON.parse(localStorage.getItem('items'));
+  const elements: string[] = JSON.parse(localStorage.getItem('items'));
   objRefs.containerUl.insertAdjacentHTML('afterbegin', getTemplate(elements));
 }
 
@@ -119,6 +119,6 @@ function getTemplate(value): string {
     })
     .join('');
 }
-function cleanAll() {
+function cleanAll():void  {
   objRefs.containerUl.innerHTML = '';
 }
