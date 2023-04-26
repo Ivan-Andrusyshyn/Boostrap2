@@ -1,3 +1,4 @@
+import { AxiosPromise, AxiosResponse } from 'axios';
 import { api } from './fetch';
 import { objRefs } from './refs';
 import Notiflix from 'notiflix';
@@ -17,6 +18,8 @@ function makeOnSubm(e): void {
 async function takeImg() {
   try {
     const { data } = await api.makeFetch();
+    console.log(api.makeFetch());
+
     const template: string = `<img src="${data.hits[4].largeImageURL}" class="img-fluid" height="300px" image alt="">`;
     objRefs.divImg.innerHTML = template;
   } catch (err) {
@@ -25,12 +28,14 @@ async function takeImg() {
     objRefs.form.reset();
   }
 }
+
 async function takeWord() {
   try {
-    const { data } = await api.makeEnglishWords();
-    const desrcWord: string = data[0].meanings[0].definitions[0].definition;
-    objRefs.newScreen.textContent = data[0].word;
-    objRefs.voisWords.src = data[0].phonetics[0].audio;
+    const data = await api.makeEnglishWords();
+    const desrcWord: string =
+      data?.data[0].meanings[0].definitions[0].definition;
+    objRefs.newScreen.textContent = data?.data[0].word;
+    objRefs.voisWords.src = data?.data[0].phonetics[0].audio;
     objRefs.textDescr.textContent = desrcWord;
   } catch (err) {
     console.log(err);
@@ -49,14 +54,14 @@ function addCardtoLibrary() {
   let voisWords = objRefs.voisWords.src;
   let img = imgSrc.src;
   let word = objRefs.newScreen.textContent;
-  const newInfo = localStorage.getItem('items');
 
-  let newData = JSON.parse(newInfo);
+  let newData = JSON.parse(localStorage.getItem('items'));
+
   const removeData = newData.filter(el => {
     if (el[4] !== word) {
       return el;
     } else {
-      Notiflix.Report.warning('This card already exist !', '');
+      Notiflix.Report.warning('This card already exist !', '', '');
     }
   });
 
@@ -82,7 +87,7 @@ function changeTextBtn() {
     }, 2000);
   }
 }
-export function makeItemsList(): void {
+export function makeItemsList() {
   cleanAll();
   const elements = JSON.parse(localStorage.getItem('items'));
   objRefs.containerUl.insertAdjacentHTML('afterbegin', getTemplate(elements));
